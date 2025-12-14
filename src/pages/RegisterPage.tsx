@@ -19,7 +19,8 @@ function RegisterPage() {
     try{
       const payload : UserType = {
         username : values.userName,
-        password : values.password
+        password : values.password,
+        balance : values.balance
       }
      const response =  await RegisterPageService.register(payload)
      if(response){
@@ -35,8 +36,10 @@ function RegisterPage() {
   const {values,handleSubmit,handleChange,errors,resetForm} = useFormik({
 
      initialValues: {
+        id: String(Math.floor(Math.random()*9999999)),
        userName: '',
        password: '',
+       balance : 1500
      },
 
      onSubmit: submit,
