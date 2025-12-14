@@ -1,10 +1,33 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import type { UserType } from '../types/Types';
-import { setCurrentUser } from '../redux/appSlice';
+import "../css/HomePage.css"
+import { useDispatch, useSelector } from 'react-redux'
+import type { ProductType, UserType } from '../types/Types';
+import { setCurrentUser, setLoading, setProducts } from '../redux/appSlice';
+import productService from '../services/ProductService';
+import { toast } from 'react-toastify';
+import type { RootState } from '../redux/store';
+import ProductCard from '../components/ProductCard';
 
 function HomePage() {
   const dispatch = useDispatch();
+  const {products} = useSelector((state:RootState)=>state.app)
+  const getAllProducts = async()=>{
+    try{ 
+      dispatch(setLoading(true))
+      const response:ProductType[]  = await productService.getAllProducts();
+      if(response){
+        dispatch(setProducts(response))
+      }
+
+    }catch(error){
+      toast.error("Ürünler getirilirken hata oluştu")
+    }finally{
+      dispatch(setLoading(false))
+    }
+  }
+  useEffect(()=>{
+      getAllProducts();
+  },[])
   useEffect(()=>{
      const result = localStorage.getItem("currentUser")
      if (result) {
@@ -13,8 +36,12 @@ function HomePage() {
      }
   },[])
   return (
-    <div>
-      Home Page
+    <div className='products'>
+      {
+        products && products.map((product:ProductType,index :Number)=>(
+            <ProductCard key={index} product = {product}/>
+        ))
+      }
     </div>
   )
 }
