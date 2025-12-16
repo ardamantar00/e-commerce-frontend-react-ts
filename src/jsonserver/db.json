@@ -1,5 +1,10 @@
 {
   "users": [
-    
+    {
+      "id": "0d26",
+      "username": "ardamantar2@gmail.com",
+      "password": "123456",
+      "balance": 1500
+    }
   ]
 }

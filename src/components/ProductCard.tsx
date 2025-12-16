@@ -14,17 +14,19 @@ function ProductCard(props: ProductCardProps) {
   return (
     <Card sx={{cursor:"pointer",boxShadow:"1px 5px 5px lightgrey",width:"300px",height:"550px",display :"flex",flexDirection :"column",alignItems:"center",justifyContent:"center",margin: "60px 10px" }}>
       <img src= {image} width={250} height={250} />
-      <CardContent sx={{height: "250px"}}>
+      <CardContent sx={{height: "220px",overflow: "hidden",textAlign: "center"}}>
         <Typography gutterBottom variant="h5" component="div">
-          {title.substring(1,70)}
+          {title.substring(0,70)}
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {description.substring(1,200)} ...
+          {description.substring(0,200)} ...
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" variant='outlined'>Detay</Button>
-        
+    <div>
+      <h2 style={{fontFamily: "arial",color: "yellowgreen"}}>{price} ₺</h2>
+    </div>
+      <CardActions sx={{ justifyContent: "center",flexGrow :1 }}>
+        <Button size="small" variant="outlined">Detay</Button>
       </CardActions>
     </Card>
   )

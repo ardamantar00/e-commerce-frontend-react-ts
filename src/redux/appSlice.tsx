@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ProductType } from '../types/Types'
+import type { ProductType, UserType } from '../types/Types'
 
 
 
@@ -21,7 +21,7 @@ const appSlice = createSlice({
         setLoading : (state : appSliceType,action:PayloadAction<boolean>) =>{
             state.loading = action.payload
         },
-        setCurrentUser : (state : appSliceType,action:PayloadAction<boolean>)=>{
+        setCurrentUser : (state : appSliceType,action:PayloadAction<UserType | null>)=>{
             state.currentUser = action.payload
         },
         setProducts : (state: appSliceType.action,action:PayloadAction<[]>)=>{
