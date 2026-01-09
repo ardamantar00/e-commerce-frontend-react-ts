@@ -5,6 +5,7 @@ import {ToastContainer} from 'react-toastify'
 import Navbar from './components/Navbar'
 import { useSelector } from 'react-redux'
 import type { RootState } from './redux/store'
+import HomePage from './pages/HomePage'
 function App() {
 const {currentUser} = useSelector((state : RootState)=>state.app)
 
