@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ProductType, UserType } from '../types/Types'
+import type { BasketSliceType } from './basketSlice'
 
 
 
@@ -18,6 +19,9 @@ const appSlice = createSlice({
     name : "app",
     initialState,
     reducers : {
+        setBasket: (state:BasketSliceType,action:PayloadAction<ProductType[]>)=>{
+            state.basket = [...action.payload]
+        },
         setLoading : (state : appSliceType,action:PayloadAction<boolean>) =>{
             state.loading = action.payload
         },
@@ -39,5 +43,5 @@ const appSlice = createSlice({
 
     }
 })
-export const  {setLoading,setCurrentUser,setProducts,filterProducts} = appSlice.actions
+export const  {setBasket,setLoading,setCurrentUser,setProducts,filterProducts} = appSlice.actions
 export default appSlice.reducer

@@ -10,7 +10,7 @@ import type { ProductType } from '../types/Types';
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
 import Button from '@mui/material/Button';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { addProductToBasket } from '../redux/basketSlice';
 function ProductDetail() {
     const {productId} = useParams()
     const dispatch = useDispatch()
@@ -19,6 +19,15 @@ function ProductDetail() {
     const decrease = () => {
         if (count === 0) return; 
         setCount(prev => prev - 1);
+  }
+  const addBasket = ()=>{
+    if (product) {
+        const payload: ProductType = {
+            ...product,
+            count : count
+        }
+        dispatch(addProductToBasket(payload))
+    }
   }
     const getProductById = async (productId:Number)=>{
         try {
@@ -52,7 +61,7 @@ function ProductDetail() {
                  <CiCircleMinus onClick={()=>decrease()} className='button' /> 
              </div>
              <div>
-                <Button color='info' variant='contained' startIcon={<ShoppingBasketIcon />}  size="small">Sepete Ekle</Button>
+                <Button onClick={()=>addBasket()} color='info' variant='contained'size="small">Sepete Ekle</Button>
              </div>
         </div>
         </div>
