@@ -26,8 +26,18 @@ const appSlice = createSlice({
         },
         setProducts : (state: appSliceType,action:PayloadAction<ProductType[]>)=>{
             state.products = action.payload;
+        },
+        filterProducts : (state: appSliceType,action: PayloadAction<string>) =>{
+            const tempList : ProductType[] = [];
+            state.products.map((product : ProductType)=>{
+                if(product.title.toLowerCase().includes(action.payload.toLowerCase())){
+                    tempList.push(product)
+                }
+            })
+            state.products = [...tempList];
         }
+
     }
 })
-export const  {setLoading,setCurrentUser,setProducts} = appSlice.actions
+export const  {setLoading,setCurrentUser,setProducts,filterProducts} = appSlice.actions
 export default appSlice.reducer

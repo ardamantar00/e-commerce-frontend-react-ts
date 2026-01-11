@@ -36,7 +36,7 @@ function LoginPage() {
    try{
     dispatch(setLoading(true))
     const response :UserType[] = await loginPageService.login()
-    console.log(response);
+   
     if (response) {
         const checkUserResponse : CheckUserType = checkUser(response,values.userName,values.password);
         if (checkUserResponse.result && checkUserResponse.currentUser) {

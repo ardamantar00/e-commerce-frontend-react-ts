@@ -6,7 +6,6 @@ import categoryService from '../services/CategoryService'
 import { useDispatch } from 'react-redux'
 import { setLoading, setProducts } from '../redux/appSlice';
 import { toast } from 'react-toastify';
-import { string } from 'yup';
 import productService from '../services/ProductService';
 import type { ProductType } from '../types/Types';
 

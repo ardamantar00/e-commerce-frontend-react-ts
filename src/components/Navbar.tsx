@@ -11,8 +11,10 @@ import LogoIcon from "../images/magara.png"
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '../redux/appSlice';
+import { filterProducts, setCurrentUser, setProducts } from '../redux/appSlice';
 import { toast } from 'react-toastify';
+import type { ProductType } from '../types/Types';
+import productService from '../services/ProductService';
 function Navbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,6 +24,18 @@ function Navbar() {
         navigate("/login");
         toast.success("Çıkış yapılıyor")
 
+    }
+    const handleFilter =  async (e:React.ChangeEvent<HTMLInputElement>)=>{
+      try{
+        if(e.target.value){
+          dispatch(filterProducts(e.target.value))
+        }else{
+          const products:ProductType[] = await productService.getAllProducts()
+          dispatch(setProducts(products))
+        }
+      } catch(error){
+        toast.error("Filtreleme yaparken hata oluştu: " + error)
+      }
     }
   return (
     
@@ -44,6 +58,7 @@ function Navbar() {
           </Typography>
           <div style={{display: "flex",flexDirection : "row",justifyContent : "center",alignItems : "center"}}>
           <TextField
+          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleFilter(e)}
               sx={{width : "300px",marginBottom:"25px"}}
               id = "searchInput"
                 placeholder='bir şey ara ...'
