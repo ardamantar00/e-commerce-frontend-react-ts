@@ -10,6 +10,7 @@ import type { ProductType, UserType } from './types/Types'
 import productService from './services/ProductService'
 import { setBasket, setCurrentUser, setProducts } from './redux/appSlice'
 import { useEffect } from 'react'
+import BasketDetails from './pages/BasketDetails'
 function App() {
 const {currentUser} = useSelector((state : RootState)=>state.app)
 const dispatch = useDispatch()
@@ -40,6 +41,7 @@ useEffect(()=>{
       <RouterConfig/>
       <ToastContainer autoClose = {2500} style={{fontSize: "14px"}}/>
       <Spinner/>
+      <BasketDetails/>
     </div>
   )
 }

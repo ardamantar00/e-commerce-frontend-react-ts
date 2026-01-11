@@ -1,16 +1,15 @@
-import React from 'react'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ProductType } from '../types/Types'
 
 export interface BasketSliceType{
-        basket : ProductType[]
+        basket : ProductType[],
+        totalAmount : number,
     }
-
-
-    
+    const basketFromStorage = localStorage.getItem("basket")
     const initialState:BasketSliceType = {
-        basket : []
+        basket :basketFromStorage ? JSON.parse(basketFromStorage):[],
+        totalAmount : 0
     }
     const basketSlice = createSlice({
         name : "basket",
@@ -35,9 +34,27 @@ export interface BasketSliceType{
                     }
                 }
                 localStorage.setItem("basket",JSON.stringify(state.basket))
+            },
+            calculateBasket : (state:BasketSliceType)=>{
+                let totalAmount = 0
+                state.basket.forEach((product:ProductType)=>{
+                    if(product.count) {
+                        totalAmount += product.price * product.count
+                    } 
+                })
+                state.totalAmount = totalAmount
+            },
+            removeProductFromBasket : (state: BasketSliceType,action: PayloadAction<number>)=> {
+                state.basket = [...state.basket.filter((product:ProductType)=>product.id !== action.payload)]
+                localStorage.setItem("basket",JSON.stringify(state.basket))
+            },
+            clearBasket: (state: BasketSliceType) => {
+                state.basket = [];
+                state.totalAmount = 0;
+                localStorage.removeItem("basket");
             }
             
         }
     })
-export const { addProductToBasket} = basketSlice.actions;
+export const { addProductToBasket,calculateBasket, removeProductFromBasket,clearBasket} = basketSlice.actions;
 export default basketSlice.reducer
