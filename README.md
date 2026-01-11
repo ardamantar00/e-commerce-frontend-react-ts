@@ -1,73 +1,95 @@
-# React + TypeScript + Vite
+# 🛒 E-Commerce Frontend (React + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, **React + TypeScript** kullanılarak geliştirilmiş bir **e-ticaret frontend** uygulamasıdır. Modern frontend araçları ve state management yapıları kullanılarak ölçeklenebilir bir mimari hedeflenmiştir.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Kullanılan Teknolojiler
 
-## React Compiler
+* ⚛️ **React**
+* 🟦 **TypeScript**
+* ⚡ **Vite**
+* 🧰 **Redux Toolkit**
+* 🎨 **MUI (Material UI)**
+* 🔔 **React Toastify**
+* 🧪 **ESLint**
+* 🗄 **JSON Server** (Mock API)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📦 Proje Scriptleri
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev       # Development ortamını başlatır
+npm run build     # TypeScript build + Vite production build
+npm run preview   # Production build önizleme
+npm run lint      # ESLint kontrolü
+npm run server    # JSON Server (Mock API) çalıştırır
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🗂 JSON Server
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Proje, backend ihtiyacını karşılamak için **json-server** kullanmaktadır.
+
+* 📁 Konum: `src/jsonserver/db.json`
+* 🌐 Port: `http://localhost:3001`
+
+Server’ı çalıştırmak için:
+
+```bash
+npm run server
 ```
+
+---
+
+## 🛍️ Özellikler
+
+* 🔍 Ürün listeleme
+* 🧺 Sepete ürün ekleme / çıkarma
+* 💰 Toplam tutar hesaplama
+* 🛒 Satın alma simülasyonu
+* 📂 Kategori bazlı filtreleme
+* ⚡ Redux ile global state yönetimi
+
+---
+
+## 📁 Proje Yapısı (Özet)
+
+```
+src/
+ ├─ components/
+ ├─ pages/
+ ├─ redux/
+ │   ├─ basketSlice.ts
+ │   ├─ appSlice.ts
+ ├─ services/
+ ├─ jsonserver/
+ │   └─ db.json
+ └─ types/
+```
+
+---
+
+## ▶️ Kurulum
+
+```bash
+git clone https://github.com/ardamantar00/e-commerce-frontend-react-ts.git
+cd e-commerce-frontend-react-ts
+npm install
+```
+
+Ardından iki terminal açman önerilir:
+
+```bash
+npm run dev
+npm run server
+```
+
+---
+
+## 🎯 Amaç
+
+Bu proje; **React, TypeScript, Redux Toolkit** bilgilerini pekiştirmek ve gerçek bir e-ticaret uygulamasının frontend mimarisini deneyimlemek amacıyla geliştirilmiştir.
+
